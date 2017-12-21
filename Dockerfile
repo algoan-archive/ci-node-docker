@@ -24,6 +24,7 @@ RUN apt-get update -qqy && apt-get install -qqy \
     gcloud config set metrics/environment github_docker_image && \
     gcloud --version
 
+RUN apt-get install kubectl
 RUN yarn global add nodemon typescript
 
 VOLUME ["/root/.config"]
