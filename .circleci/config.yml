@@ -43,6 +43,9 @@ jobs:
     steps:
       - checkout
       - run: 
+          name: Verify existance of docker
+          command: docker -v
+      - run: 
           name: Verify existance of gcloud command
           command: gcloud --version
       - run: 
