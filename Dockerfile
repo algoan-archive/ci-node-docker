@@ -13,6 +13,7 @@ RUN apt-get update -qqy && apt-get install -qqy \
         lsb-release \
         openssh-client \
         git \
+        zip \
     && easy_install -U pip && \
     pip install -U crcmod && \
     export CLOUD_SDK_REPO="cloud-sdk-$(lsb_release -c -s)" && \
@@ -25,6 +26,6 @@ RUN apt-get update -qqy && apt-get install -qqy \
     gcloud --version
 
 RUN apt-get install kubectl
-RUN yarn global add nodemon typescript
+RUN yarn global add nodemon typescript colorguard node-gyp testcafe node-static
 
 VOLUME ["/root/.config"]

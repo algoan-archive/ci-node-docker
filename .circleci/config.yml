@@ -1,0 +1,47 @@
+version: 2
+workflows:
+  version: 2
+  dockerfile_wizard:
+    jobs:
+      - build_and_deploy
+      - test_image:
+          requires:
+            - build_and_deploy
+image_config: &image_config
+  DOCKERHUB_ID: yelloan
+  DOCKER_IMAGE: node-docker
+jobs:
+  build_and_deploy:
+    machine: true
+    environment:
+          <<: *image_config
+    steps:
+      - checkout
+      - run:
+          name: Build image
+          command: docker build -t $DOCKER_IMAGE .
+      - run:
+          name: Login on dockerhub
+          command: docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD
+      - run:
+          name: Tag image
+          command: docker tag $DOCKER_IMAGE $DOCKERHUB_ID/$DOCKER_IMAGE:${CIRCLE_TAG:-latest}
+      - deploy:
+          name: Push on dockerhub
+          command: docker push $DOCKERHUB_ID/$DOCKER_IMAGE:${CIRCLE_TAG:-latest} && sleep 10
+  test_image:
+    docker:
+      - image: $DOCKERHUB_ID/$DOCKER_IMAGE:${CIRCLE_TAG:-latest}
+    environment:
+          <<: *image_config
+    steps:
+      - checkout
+      - run: 
+          name: Verify existance of gcloud command
+          command: gcloud --version
+      - run: 
+          name: Verify existance of kubectl command
+          command: kubectl
+      - run: 
+          name: Verify existance of node
+          command: node --version
