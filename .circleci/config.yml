@@ -3,10 +3,16 @@ workflows:
   version: 2
   dockerfile_wizard:
     jobs:
-      - build_and_deploy
+      - build_and_deploy:
+          filters:
+            tags:
+              only: /.*/
       - test_image:
           requires:
             - build_and_deploy
+          filters:
+            tags:
+              only: /.*/ 
 image_config: &image_config
   DOCKERHUB_ID: yelloan
   DOCKER_IMAGE: node-docker
