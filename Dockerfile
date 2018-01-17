@@ -1,4 +1,4 @@
-FROM node:9.3.0
+FROM node:8.9.4
 MAINTAINER Yelloan "devteam@yelloan.com"
 
 ENV CLOUD_SDK_VERSION 183.0.0
