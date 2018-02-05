@@ -14,6 +14,7 @@ RUN apt-get update -qqy && apt-get install -qqy \
         openssh-client \
         git \
         zip \
+        pdftk \
     && easy_install -U pip && \
     pip install -U crcmod && \
     export CLOUD_SDK_REPO="cloud-sdk-$(lsb_release -c -s)" && \
@@ -38,6 +39,6 @@ RUN set -ex \
   && (docker version || true)
 
 RUN apt-get install kubectl
-RUN yarn global add nodemon typescript colorguard node-gyp testcafe node-static
+RUN yarn global add nodemon typescript colorguard node-gyp testcafe node-static mocha istanbul bower grunt-cli bower-shrinkwrap-resolver
 
 VOLUME ["/root/.config"]
