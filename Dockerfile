@@ -39,6 +39,6 @@ RUN set -ex \
   && (docker version || true)
 
 RUN apt-get install kubectl
-RUN yarn global add nodemon typescript colorguard node-gyp testcafe node-static mocha istanbul bower grunt-cli bower-shrinkwrap-resolver
+RUN yarn global add nodemon typescript colorguard node-gyp testcafe node-static mocha istanbul bower grunt-cli bower-shrinkwrap-resolver nc
 
 VOLUME ["/root/.config"]
