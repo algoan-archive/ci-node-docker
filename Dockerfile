@@ -1,4 +1,4 @@
-FROM node:8.11.2
+FROM node:8.11.3
 MAINTAINER Yelloan "devteam@yelloan.com"
 
 ENV CLOUD_SDK_VERSION 198.0.0
@@ -39,6 +39,6 @@ RUN set -ex \
   && (docker version || true)
 
 RUN apt-get install kubectl
-RUN yarn global add nodemon typescript colorguard node-gyp testcafe node-static mocha istanbul bower grunt-cli bower-shrinkwrap-resolver nc
+RUN yarn global add nodemon typescript colorguard node-gyp cypress node-static mocha istanbul bower grunt-cli bower-shrinkwrap-resolver nc
 
 VOLUME ["/root/.config"]
