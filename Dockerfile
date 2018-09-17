@@ -21,7 +21,8 @@ RUN apk add \
   xvfb \
   libnotify-dev \
   py-pip \
-  py-crcmod
+  py-crcmod \
+  jq
 
 # Install GCloud (https://github.com/GoogleCloudPlatform/cloud-sdk-docker/blob/master/alpine/Dockerfile)
 RUN curl -O https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-${CLOUD_SDK_VERSION}-linux-x86_64.tar.gz && \
