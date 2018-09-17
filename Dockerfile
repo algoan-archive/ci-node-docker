@@ -22,6 +22,7 @@ RUN apt-get update -qqy && apt-get install -qqy \
         libnss3 \
         libxss1 \
         libasound2 \
+        jq \
     && easy_install -U pip && \
     pip install -U crcmod && \
     export CLOUD_SDK_REPO="cloud-sdk-$(lsb_release -c -s)" && \
