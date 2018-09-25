@@ -52,6 +52,6 @@ RUN curl -L -o /usr/bin/kubectl https://storage.googleapis.com/kubernetes-releas
   kubectl version --client
 
 # Install global node dependencies
-RUN npm -g i npm nodemon typescript colorguard node-gyp node-static mocha istanbul grunt-cli nc
+RUN npm -g i npm nodemon typescript colorguard node-gyp node-static mocha istanbul grunt-cli nc sonarqube-scanner
 
 VOLUME ["/root/.config"]
