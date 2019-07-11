@@ -17,7 +17,6 @@ RUN apk add \
   libc6-compat \
   git \
   zip \
-  pdftk \
   xvfb \
   libnotify-dev \
   py-pip \
