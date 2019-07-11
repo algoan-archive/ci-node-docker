@@ -53,5 +53,7 @@ RUN curl -L -o /usr/bin/kubectl https://storage.googleapis.com/kubernetes-releas
 
 # Install global node dependencies
 RUN npm -g i npm nodemon typescript colorguard node-gyp node-static mocha istanbul grunt-cli nc sonarqube-scanner
+# grab the latest version of Helm 
+RUN curl -L https://git.io/get_helm.sh | bash
 
 VOLUME ["/root/.config"]
