@@ -56,4 +56,4 @@ jobs:
           command: node --version
       - run: 
           name: Verify existance of helm
-          command: helm version
+          command: helm version --client
