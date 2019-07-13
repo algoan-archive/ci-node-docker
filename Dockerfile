@@ -23,6 +23,7 @@ RUN apt-get update -qqy && apt-get install -qqy \
         libxss1 \
         libasound2 \
         jq \
+        default-jre \
     && easy_install -U pip && \
     pip install -U crcmod && \
     export CLOUD_SDK_REPO="cloud-sdk-$(lsb_release -c -s)" && \
@@ -32,6 +33,7 @@ RUN apt-get update -qqy && apt-get install -qqy \
     gcloud config set core/disable_usage_reporting true && \
     gcloud config set component_manager/disable_update_check true && \
     gcloud config set metrics/environment github_docker_image && \
+    gcloud components install beta pubsub-emulator && \
     gcloud --version
 
 RUN set -ex \
