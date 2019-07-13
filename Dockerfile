@@ -21,7 +21,9 @@ RUN apk add \
   libnotify-dev \
   py-pip \
   py-crcmod \
-  jq
+  jq \ 
+  openjdk7-jre \
+  netcat-openbsd
 
 # Install GCloud (https://github.com/GoogleCloudPlatform/cloud-sdk-docker/blob/master/alpine/Dockerfile)
 RUN curl -O https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-${CLOUD_SDK_VERSION}-linux-x86_64.tar.gz && \
@@ -31,6 +33,7 @@ RUN curl -O https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cl
   gcloud config set core/disable_usage_reporting true && \
   gcloud config set component_manager/disable_update_check true && \
   gcloud config set metrics/environment github_docker_image && \
+  gcloud components install beta pubsub-emulator && \
   gcloud --version
 
 RUN set -ex \
