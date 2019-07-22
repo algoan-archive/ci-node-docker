@@ -24,6 +24,8 @@ RUN apk add \
   jq \ 
   openjdk7-jre \
   netcat-openbsd
+RUN apk add gettext libintl \
+    && mv /usr/bin/envsubst /usr/local/sbin/envsubst
 
 # Install GCloud (https://github.com/GoogleCloudPlatform/cloud-sdk-docker/blob/master/alpine/Dockerfile)
 RUN curl -O https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-${CLOUD_SDK_VERSION}-linux-x86_64.tar.gz && \
