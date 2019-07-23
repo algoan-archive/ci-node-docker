@@ -1,5 +1,5 @@
-FROM node:8.12.0
-MAINTAINER Yelloan "devteam@yelloan.com"
+FROM node:carbon
+LABEL Algoan "dev-team@algoan.com"
 
 ENV CLOUD_SDK_VERSION 198.0.0
 
@@ -23,6 +23,8 @@ RUN apt-get update -qqy && apt-get install -qqy \
         libxss1 \
         libasound2 \
         jq \
+        default-jre \
+        gettext-base \ 
     && easy_install -U pip && \
     pip install -U crcmod && \
     export CLOUD_SDK_REPO="cloud-sdk-$(lsb_release -c -s)" && \
@@ -32,6 +34,7 @@ RUN apt-get update -qqy && apt-get install -qqy \
     gcloud config set core/disable_usage_reporting true && \
     gcloud config set component_manager/disable_update_check true && \
     gcloud config set metrics/environment github_docker_image && \
+    gcloud components install beta pubsub-emulator && \    
     gcloud --version
 
 RUN set -ex \
@@ -55,5 +58,9 @@ RUN echo "deb http://deb.debian.org/debian stretch main" > /etc/apt/sources.list
 
 RUN npm -g i npm
 RUN npm install -g nodemon typescript colorguard node-gyp cypress node-static mocha istanbul bower grunt-cli bower-shrinkwrap-resolver nc @percy/cypress
+
+RUN wget https://storage.googleapis.com/kubernetes-helm/helm-v2.10.0-linux-amd64.tar.gz
+RUN tar zxfv helm-v2.10.0-linux-amd64.tar.gz
+RUN cp linux-amd64/helm /usr/local/bin/helm
 
 VOLUME ["/root/.config"]
