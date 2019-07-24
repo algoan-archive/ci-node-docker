@@ -24,17 +24,20 @@ RUN apt-get update -qqy && apt-get install -qqy \
         libasound2 \
         jq \
         default-jre \
-        gettext-base \
-    && easy_install -U pip && \
-    pip install -U crcmod && \
-    export CLOUD_SDK_REPO="cloud-sdk-$(lsb_release -c -s)" && \
+        gettext-base
+
+RUN easy_install -U pip && \
+    pip install -U crcmod
+
+RUN export CLOUD_SDK_REPO="cloud-sdk-$(lsb_release -c -s)" && \
     echo "deb https://packages.cloud.google.com/apt $CLOUD_SDK_REPO main" > /etc/apt/sources.list.d/google-cloud-sdk.list && \
-    curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add - && \
-    apt-get update && apt-get install -y google-cloud-sdk=${CLOUD_SDK_VERSION}-0 $INSTALL_COMPONENTS && \
-    gcloud config set core/disable_usage_reporting true && \
+    curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -
+
+RUN apt-get update && apt-get install -y google-cloud-sdk=${CLOUD_SDK_VERSION}-0 google-cloud-sdk-pubsub-emulator=${CLOUD_SDK_VERSION}-0
+
+RUN gcloud config set core/disable_usage_reporting true && \
     gcloud config set component_manager/disable_update_check true && \
     gcloud config set metrics/environment github_docker_image && \
-    gcloud components install beta pubsub-emulator && \
     gcloud --version
 
 RUN set -ex \
@@ -57,7 +60,6 @@ RUN echo "deb http://deb.debian.org/debian stretch main" > /etc/apt/sources.list
     && apt-get clean
 
 RUN npm -g i npm
-RUN npm install -g nodemon typescript colorguard node-gyp cypress node-static mocha istanbul bower grunt-cli bower-shrinkwrap-resolver nc @percy/cypress
 
 RUN wget https://storage.googleapis.com/kubernetes-helm/helm-v2.10.0-linux-amd64.tar.gz
 RUN tar zxfv helm-v2.10.0-linux-amd64.tar.gz
