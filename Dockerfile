@@ -1,4 +1,4 @@
-FROM node:carbon
+FROM node:10.8.0
 LABEL Algoan "dev-team@algoan.com"
 
 ENV CLOUD_SDK_VERSION 255.0.0

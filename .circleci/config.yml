@@ -31,13 +31,13 @@ jobs:
           command: docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD
       - run:
           name: Tag image
-          command: docker tag $DOCKER_IMAGE $DOCKERHUB_ID/$DOCKER_IMAGE:${CIRCLE_TAG:-lts}
+          command: docker tag $DOCKER_IMAGE $DOCKERHUB_ID/$DOCKER_IMAGE:${CIRCLE_TAG:-node-10.8.0}
       - deploy:
           name: Push on dockerhub
-          command: docker push $DOCKERHUB_ID/$DOCKER_IMAGE:${CIRCLE_TAG:-lts} && sleep 10
+          command: docker push $DOCKERHUB_ID/$DOCKER_IMAGE:${CIRCLE_TAG:-node-10.8.0} && sleep 10
   test_image:
     docker:
-      - image: $DOCKERHUB_ID/$DOCKER_IMAGE:${CIRCLE_TAG:-lts}
+      - image: $DOCKERHUB_ID/$DOCKER_IMAGE:${CIRCLE_TAG:-node-10.8.0}
     environment:
           <<: *image_config
     steps:

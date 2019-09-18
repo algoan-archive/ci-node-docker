@@ -1,6 +1,6 @@
 export DOCKER_USERID=${DOCKER_USERID:-"yelloan"}
 export DOCKER_IMAGE=${DOCKER_IMAGE:-"node-docker"}
-export DOCKER_TAG=lts
+export DOCKER_TAG=node-10.8.0
 docker build -t $DOCKER_IMAGE .
 docker tag $DOCKER_IMAGE $DOCKER_USERID/$DOCKER_IMAGE:$DOCKER_TAG
 docker push $DOCKER_USERID/$DOCKER_TAG
