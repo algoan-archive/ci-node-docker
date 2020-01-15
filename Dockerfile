@@ -1,4 +1,4 @@
-FROM node:carbon-alpine
+FROM node:lts-alpine
 LABEL Algoan "dev-team@algoan.com"
 
 ENV CLOUD_SDK_VERSION 214.0.0
@@ -21,7 +21,7 @@ RUN apk add \
   libnotify-dev \
   py-pip \
   py-crcmod \
-  jq \ 
+  jq \
   openjdk7-jre \
   netcat-openbsd
 
